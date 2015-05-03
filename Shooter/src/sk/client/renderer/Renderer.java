@@ -6,6 +6,7 @@ import org.lwjgl.opengl.GL11;
 import org.lwjgl.util.vector.Vector2f;
 
 import sk.client.debug.Debug;
+import sk.client.gfx.texture.Texture;
 
 public class Renderer {
 	
@@ -15,15 +16,28 @@ public class Renderer {
 	private Vector2f translation = new Vector2f();
 	private float rotation = 0;
 	
+	private Texture texture;
+	
 	private int mode = GL11.GL_QUADS;
 	
 	public Renderer() {}
 	
 	public Renderer(Vertex[] vertices) {
+		this(vertices, null);
+	}
+	
+	public Renderer(Vertex[] vertices, Texture texture) {
 		this.vertices = vertices;
+		this.texture = texture;
 	}
 	
 	public void draw() {
+		
+		if(hasTexture()) {
+			GL11.glEnable(GL11.GL_TEXTURE_2D);
+			texture.bind();
+		}
+		
 		GL11.glPushMatrix();
 		{
 			GL11.glScalef(scale.x, scale.y, 1);
@@ -33,13 +47,34 @@ public class Renderer {
 			{
 				for(int i = 0; i < vertices.length; i++) {
 					Vertex v = vertices[i];
-					GL11.glColor4f(v.color.x, v.color.y, v.color.z, v.color.w);
-					GL11.glVertex2f(vertices[i].pos.x, vertices[i].pos.y);
+					GL11.glColor4f(v.getR(), v.getG(), v.getB(), v.getA());
+					if(hasTexture())
+						GL11.glTexCoord2f(v.getS(), v.getT());
+					GL11.glVertex2f(v.getX(), v.getY());
 				}
 			}
 			GL11.glEnd();
 		}
 		GL11.glPopMatrix();
+		
+		if(hasTexture())
+			GL11.glDisable(GL11.GL_TEXTURE_2D);
+	}
+	
+	private void adjustRotation() {
+		rotation %= 360;
+		if(rotation < 0)
+			rotation += 360;
+	}
+	
+	public Renderer setVertices(Vertex[] vertices) {
+		this.vertices = vertices;
+		return this;
+	}
+	
+	public Renderer setTexture(Texture texture) {
+		this.texture = texture;
+		return this;
 	}
 	
 	public Vector2f getTranslation() {
@@ -84,7 +119,8 @@ public class Renderer {
 	
 	public Renderer rotate(float r) {
 		rotation += r;
-		r %= 360;
+		adjustRotation();
+		
 		return this;
 	}
 	
@@ -122,12 +158,17 @@ public class Renderer {
 	
 	public Renderer setRotation(float r) {
 		rotation = r;
+		adjustRotation();
 		return this;
 	}
 	
 	public Renderer setMode(int mode) {
 		this.mode = mode;
 		return this;
+	}
+	
+	public boolean hasTexture() {
+		return texture != null;
 	}
 	
 }

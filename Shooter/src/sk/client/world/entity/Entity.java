@@ -20,7 +20,7 @@ public abstract class Entity {
 		init();
 	}
 	
-	public void update(double tick) {
+	public void update(float tick) {
 		if(active && updating)
 			onUpdate(tick);
 	}
@@ -32,7 +32,7 @@ public abstract class Entity {
 	
 	//Mandatory
 	protected abstract void init();
-	protected abstract void onUpdate(double tick);
+	protected abstract void onUpdate(float tick);
 	protected abstract void destroy();
 	
 	//Optional

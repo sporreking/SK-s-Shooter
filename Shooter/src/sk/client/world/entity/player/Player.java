@@ -6,8 +6,10 @@ import org.lwjgl.opengl.Display;
 
 import sk.client.debug.Debug;
 import sk.client.game.Game;
+import sk.client.gfx.texture.TextureLibrary;
 import sk.client.renderer.QuadRenderer;
 import sk.client.renderer.Renderer;
+import sk.client.util.Util;
 import sk.client.weapon.Bullet;
 import sk.client.world.World;
 import sk.client.world.entity.Entity;
@@ -18,11 +20,13 @@ public class Player extends Entity {
 	public static final float PLAYER_WIDTH = 100;
 	public static final float PLAYER_HEIGHT = 100;
 	
+	private float speed = .5f;
+	
 	private World world;
 	private EntityManager em;
 	
 	public Player(World world, float spawnX, float spawnY) {
-		super(new QuadRenderer(spawnX, spawnY, PLAYER_WIDTH, PLAYER_HEIGHT, 0, 1, 1));
+		super(new QuadRenderer(spawnX, spawnY, PLAYER_WIDTH, PLAYER_HEIGHT, true, TextureLibrary.get("Ship")));
 		
 		this.world = world;
 		em = world.getEntityManager();
@@ -34,35 +38,59 @@ public class Player extends Entity {
 	public void onMouse(int button, boolean pressed) {
 		if(pressed) {
 			switch(button) {
-			case 0: em.addToGroup("Bullets", new Bullet(world, getX(), getY(), 10, 1000, getRotation()));
+			case 0: em.addToGroup("Bullets", new Bullet(world, getX(), getY(), 10, 1, getRotation()));
 			}
 		}
 	}
 	public void onKeyboard(int key, boolean pressed) {}
 	
-	protected void onUpdate(double tick) {
+	protected void onUpdate(float tick) {
 		boolean w = Keyboard.isKeyDown(Keyboard.KEY_W);
 		boolean a = Keyboard.isKeyDown(Keyboard.KEY_A);
 		boolean s = Keyboard.isKeyDown(Keyboard.KEY_S);
 		boolean d = Keyboard.isKeyDown(Keyboard.KEY_D);
 		
-		float speed = 500f;
-		
 		if(w)
-			translate(0, -(float)(tick * speed));
+			translate(0, -tick * speed);
 		if(a)
-			translate(-(float)(tick * speed), 0);
+			translate(-tick * speed, 0);
 		if(s)
-			translate(0, (float)(tick * speed));
+			translate(0, tick * speed);
 		if(d)
-			translate((float)(tick * speed), 0);
+			translate(tick * speed, 0);
 		
 		float dx = Mouse.getX() - getX() / Game.WIDTH * Display.getWidth();
-		float dy = (Display.getHeight() - Mouse.getY()) - getY() / Game.HEIGHT * Display.getHeight();
+		float dy = -Game.HEIGHT;
 		
-		float angle = (float)Math.toDegrees(Math.atan2(dy, dx));
+		if(getX() < Util.getRelativeMX()) {
+			translate((Util.getRelativeMX() - getX()) / 200 * tick * speed, 0);
+			if(getX() > Util.getRelativeMX())
+				setX(Util.getRelativeMX());
+		}
+		
+		if(getX() > Util.getRelativeMX()) {
+			translate((Util.getRelativeMX() - getX()) / 200 * tick * speed, 0);
+			if(getX() < Util.getRelativeMX())
+				setX(Util.getRelativeMX());
+		}
+		
+		float angle = (float)Math.toDegrees(Math.atan2(dy, dx)) + 90;
 		
 		setRotation(angle);
+	}
+	
+	public Player addSpeed(float speed) {
+		this.speed += speed;
+		return this;
+	}
+	
+	public Player setSpeed(float speed) {
+		this.speed = speed;
+		return this;
+	}
+	
+	public float getSpeed() {
+		return speed;
 	}
 	
 	protected void destroy() {}

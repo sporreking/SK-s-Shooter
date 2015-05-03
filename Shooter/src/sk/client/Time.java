@@ -3,9 +3,10 @@ package sk.client;
 public final class Time {
 	
 	private static final long startTimeNano = System.nanoTime();
+	private static final long startTimeMilli = System.currentTimeMillis();
 	
-	private static long previousTime = getNanoTime();
-	private static double delta = 0;
+	private static long previousTime = getMilliTime();
+	private static float delta = 0;
 	
 	private static double deltaStack = 0;
 	private static int fpsCounter = 0;
@@ -15,22 +16,26 @@ public final class Time {
 		return System.nanoTime() - startTimeNano;
 	}
 	
+	public static final long getMilliTime() {
+		return System.currentTimeMillis() - startTimeMilli;
+	}
+	
 	public static final void update() {
-		long currentTime = getNanoTime();
+		long currentTime = getMilliTime();
 		delta = currentTime - previousTime;
-		delta /= 1000000000;
+//		delta /= 1000000;
 		previousTime = currentTime;
 		
 		deltaStack += getDelta();
 		fpsCounter++;
-		if(deltaStack >= 1) {
+		if(deltaStack >= 1000) {
 			fps = fpsCounter;
 			deltaStack = 0;
 			fpsCounter = 0;
 		}
 	}
 	
-	public static final double getDelta() {
+	public static final float getDelta() {
 		return delta;
 	}
 	

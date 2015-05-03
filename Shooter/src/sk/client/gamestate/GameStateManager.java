@@ -7,6 +7,7 @@ import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.DisplayMode;
 import org.lwjgl.opengl.GL11;
 
+import sk.client.Time;
 import sk.client.game.Game;
 
 public final class GameStateManager {
@@ -25,7 +26,7 @@ public final class GameStateManager {
 	public static final void update() {
 		checkMouse();
 		checkKeyboard();
-		currentState.update();
+		currentState.update(Time.getDelta());
 		currentState.draw();
 	}
 	

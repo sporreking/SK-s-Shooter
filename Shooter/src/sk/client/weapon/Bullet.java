@@ -11,7 +11,7 @@ import sk.client.world.entity.EntityManager;
 
 public class Bullet extends Entity {
 	
-	protected Vector4f color = new Vector4f(.5f, .5f, .5f, 1f);
+	protected Vector4f color = new Vector4f(1f, 0f, 0f, 1f);
 	
 	protected float speed;
 	
@@ -25,25 +25,25 @@ public class Bullet extends Entity {
 		this.world = world;
 		em = world.getEntityManager();
 		
-		renderer = new QuadRenderer(x, y, size, size, color.x, color.y, color.z, color.w);
+		width = size;
+		height = size * 1.5f;
+		
+		renderer = new QuadRenderer(x, y, width, height, color.x, color.y, color.z, color.w, true);
 		
 		setRotation(angle);
-		
-		width = size;
-		height = size;
 		
 		this.speed = speed;
 	}
 	
 	protected void init() {}
 	
-	protected void onUpdate(double tick) {
+	protected void onUpdate(float tick) {
 		
 		if(getX() < 0 || getX() > Game.WIDTH || getY() < 0 || getY() > Game.HEIGHT)
 			em.removeFromGroup("Bullets", this);
 		
-		float dx = (float)Math.cos(Math.toRadians(getRotation())) * speed;
-		float dy = (float)Math.sin(Math.toRadians(getRotation())) * speed;
+		float dx = (float)Math.sin(Math.toRadians(getRotation())) * speed;
+		float dy = -(float)Math.cos(Math.toRadians(getRotation())) * speed;
 		
 		translate((float)(dx * tick), (float)(dy * tick));
 	}

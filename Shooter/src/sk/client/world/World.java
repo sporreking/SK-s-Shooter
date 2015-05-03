@@ -1,6 +1,8 @@
 package sk.client.world;
 
+import sk.audio.AudioManager;
 import sk.client.game.Game;
+import sk.client.gfx.texture.Background;
 import sk.client.world.entity.EntityManager;
 import sk.client.world.entity.player.Player;
 
@@ -8,6 +10,7 @@ public class World {
 	
 	protected Player player;
 	protected EntityManager em;
+	protected Background background;
 	
 	public World() {
 		em = new EntityManager();
@@ -16,6 +19,15 @@ public class World {
 		em.addEntity("Player", player);
 		
 		em.addGroup("Bullets");
+		
+		AudioManager.playLoop(0, 1, 1, 10, "Main");
+	}
+	
+	public World setBackground(Background background) {
+		
+		this.background = background;
+		
+		return this;
 	}
 	
 	public void checkMouse(int button, boolean pressed) {
@@ -26,11 +38,14 @@ public class World {
 		em.checkKeyboard(key, pressed);
 	}
 	
-	public void update(double tick) {
+	public void update(float tick) {
+//		background.addSpeed(-.0001f);
+		background.update(tick);
 		em.update(tick);
 	}
 	
 	public void draw() {
+		background.draw();
 		em.draw();
 	}
 	

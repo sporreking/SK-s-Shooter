@@ -38,7 +38,7 @@ public class EntityManager {
 		}
 	}
 	
-	public void update(double tick) {
+	public void update(float tick) {
 		for(Group g : groups.values()) {
 			g.update(tick);
 		}
@@ -198,7 +198,7 @@ public class EntityManager {
 			}
 		}
 		
-		void update(double tick) {
+		void update(float tick) {
 			if(active && updating) {
 				for(Entity e : entities)
 					e.update(tick);

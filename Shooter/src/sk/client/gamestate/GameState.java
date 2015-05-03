@@ -13,7 +13,7 @@ public abstract class GameState {
 	public abstract void init();
 	public abstract void checkMouse(int button, boolean pressed);
 	public abstract void checkKeyboard(int key, boolean pressed);
-	public abstract void update();
+	public abstract void update(float tick);
 	public abstract void draw();
 	public abstract void exit();
 	
