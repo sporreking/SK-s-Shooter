@@ -30,12 +30,15 @@ public class Game implements SoundLoader {
 	private static boolean running = true;
 	private static int error = 0;
 	
+	private volatile boolean audInit = false;
+	
 	public Game() {
 		
 		try {
 			initDisplay();
 			initGL();
 			AudioManager.start(this);
+			while(!audInit);
 			registerGameStates();
 			registerTextures();
 			registerBackgrounds();
@@ -119,6 +122,8 @@ public class Game implements SoundLoader {
 				"res/audio/repeatedly.wav"));
 		AudioLibrary.registerAudio("Main",
 				new Audio("res/audio/music/Outer Space.wav"));
+		
+		audInit = true;
 	}
 	
 	public static final void stop(int error) {

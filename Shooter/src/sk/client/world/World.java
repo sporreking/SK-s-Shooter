@@ -20,7 +20,10 @@ public class World {
 		
 		em.addGroup("Bullets");
 		
-		AudioManager.playLoop(0, 1, 1, 10, "Main");
+		AudioManager.playLoop(0, 1, 10, 10, "Main");
+		
+//		AudioManager.playLoop(0, 1, 0, "Main");
+//		AudioManager.fadeLoopPitch(10, 100, 0);
 	}
 	
 	public World setBackground(Background background) {

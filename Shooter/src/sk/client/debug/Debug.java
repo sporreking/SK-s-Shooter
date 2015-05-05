@@ -5,7 +5,7 @@ public final class Debug {
 	public static final void log(Object o) {
 		StackTraceElement ste = Thread.currentThread().getStackTrace()[2];
 		
-		System.out.println("[" + ste.getFileName().split("\\.")[0] + ":"
+		System.out.println("[" + ste.getFileName().split("[.]")[0] + ":"
 				+ ste.getLineNumber() + "] " + o.toString());
 	}
 	
