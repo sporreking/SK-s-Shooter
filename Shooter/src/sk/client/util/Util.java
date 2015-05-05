@@ -15,4 +15,11 @@ public final class Util {
 		return ((float)(Mouse.getY() * -1) + Display.getHeight()) / Display.getHeight() * Game.HEIGHT;
 	}
 	
+	public static final boolean isInPow2(int number) {
+		for(int i = 2; i <= number; i *= 2)
+			if(i == number)
+				return true;
+		return false;
+	}
+	
 }

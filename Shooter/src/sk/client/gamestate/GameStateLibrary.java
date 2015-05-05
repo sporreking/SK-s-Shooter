@@ -13,4 +13,8 @@ public final class GameStateLibrary {
 	public static final GameState get(String name) {
 		return states.get(name);
 	}
+	
+	public static final void destroy() {
+		
+	}
 }

@@ -9,6 +9,7 @@ import sk.audio.AudioManager;
 import sk.client.Time;
 import sk.client.debug.Debug;
 import sk.client.gamestate.GameState;
+import sk.client.gamestate.GameStateManager;
 import sk.client.gfx.texture.Background;
 import sk.client.gfx.texture.BackgroundLibrary;
 import sk.client.gfx.texture.TextureLibrary;
@@ -35,7 +36,7 @@ public class GSGame extends GameState {
 		
 		Mouse.setGrabbed(true);
 		
-		mouseRenderer = new QuadRenderer(Mouse.getX(), Mouse.getY(), 64, 64, true, TextureLibrary.get("Aim"));
+		mouseRenderer = new QuadRenderer(Mouse.getX(), Mouse.getY(), 64, 64, true, TextureLibrary.getTexture("Aim"));
 	}
 	
 	public void checkMouse(int button, boolean pressed) {
@@ -48,6 +49,10 @@ public class GSGame extends GameState {
 			switch(key) {
 			case Keyboard.KEY_ESCAPE:
 				Game.stop(0);
+				break;
+			case Keyboard.KEY_0:
+				AudioManager.stopLoop(0);
+				GameStateManager.enterState("Test");
 				break;
 			}
 		}
@@ -81,6 +86,7 @@ public class GSGame extends GameState {
 	}
 	
 	public void exit() {
+		Mouse.setGrabbed(false);
 		world.destroy();
 	}
 }

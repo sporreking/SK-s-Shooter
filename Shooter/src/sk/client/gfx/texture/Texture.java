@@ -39,6 +39,8 @@ public class Texture {
 		setTexParams(GL11.GL_NEAREST, GL11.GL_TEXTURE_MIN_FILTER, GL11.GL_TEXTURE_MAG_FILTER);
 		setTexParams(GL11.GL_CLAMP, GL11.GL_TEXTURE_WRAP_S, GL11.GL_TEXTURE_WRAP_T);
 		
+		System.out.println("Created texture with id: \"" + id + "\"");
+		
 		return this;
 	}
 	
@@ -60,5 +62,10 @@ public class Texture {
 	
 	public int getHeight() {
 		return height;
+	}
+	
+	public void destroy() {
+		GL11.glDeleteTextures(id);
+		System.out.println("Destroyed texture with id: \"" + id + "\"");
 	}
 }

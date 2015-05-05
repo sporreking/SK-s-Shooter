@@ -21,6 +21,8 @@ public final class GameStateManager {
 		currentState = GameStateLibrary.get(gameState);
 		
 		currentState.init();
+		
+		System.out.println("Entered state \"" + currentState.NAME + "\" (" + currentState.ID + ")");
 	}
 	
 	public static final void update() {

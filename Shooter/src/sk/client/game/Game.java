@@ -39,9 +39,10 @@ public class Game implements SoundLoader {
 			initGL();
 			AudioManager.start(this);
 			while(!audInit);
-			registerGameStates();
-			registerTextures();
-			registerBackgrounds();
+			Registry.registerGameStates();
+			Registry.registerTextures();
+			Registry.registerSpriteSheets();
+			Registry.registerBackgrounds();
 			
 			GameStateManager.enterState("Game");
 			
@@ -59,6 +60,8 @@ public class Game implements SoundLoader {
 				Display.update();
 				Display.sync(FPS_CAP);
 			}
+			
+			Registry.destroy();
 			
 			AudioManager.destroy();
 			AudioManager.getThread().join();
@@ -88,33 +91,6 @@ public class Game implements SoundLoader {
 		
 		GL11.glEnable(GL11.GL_BLEND);
 		GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
-	}
-	
-	private void registerGameStates() {
-		GameStateLibrary.register(new GSGame());
-	}
-	
-	private void registerTextures() {
-		TextureLibrary.register("Ship",
-				TextureLoader.loadTexture("res/texture/ship.png"));
-		
-		TextureLibrary.register(
-				"Aim",
-				TextureLoader.loadTexture("res/texture/aim.png").setTexParams(
-						GL11.GL_LINEAR, GL11.GL_TEXTURE_MIN_FILTER,
-						GL11.GL_TEXTURE_MAG_FILTER));
-		
-		TextureLibrary.register(
-				"bg_Space",
-				TextureLoader.loadTexture("res/texture/background/space.png")
-						.setTexParams(GL11.GL_REPEAT, GL11.GL_TEXTURE_WRAP_S,
-								GL11.GL_TEXTURE_WRAP_T));
-		
-		TextureLibrary.register("Font", TextureLoader.loadTexture("res/texture/font/font.png"));
-	}
-	
-	private void registerBackgrounds() {
-		BackgroundLibrary.register("Space", new BGSpace());
 	}
 	
 	public void registerAudio() {

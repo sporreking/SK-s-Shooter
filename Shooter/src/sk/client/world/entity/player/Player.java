@@ -26,7 +26,7 @@ public class Player extends Entity {
 	private EntityManager em;
 	
 	public Player(World world, float spawnX, float spawnY) {
-		super(new QuadRenderer(spawnX, spawnY, PLAYER_WIDTH, PLAYER_HEIGHT, true, TextureLibrary.get("Ship")));
+		super(new QuadRenderer(spawnX, spawnY, PLAYER_WIDTH, PLAYER_HEIGHT, true, TextureLibrary.getTexture("Ship")));
 		
 		this.world = world;
 		em = world.getEntityManager();

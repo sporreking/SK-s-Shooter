@@ -13,7 +13,7 @@ public class BGSpace extends Background {
 		vertical = true;
 		
 		bg = new QuadRenderer(0, 0, 3 * Game.WIDTH, 3 * Game.HEIGHT, 3, 3,
-				false, TextureLibrary.get("bg_Space"));
+				false, TextureLibrary.getTexture("bg_Space"));
 	}
 	
 	public void update(float tick) {

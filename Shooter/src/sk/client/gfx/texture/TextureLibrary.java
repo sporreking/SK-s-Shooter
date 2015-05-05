@@ -4,13 +4,29 @@ import java.util.HashMap;
 
 public class TextureLibrary {
 	
-	private static final HashMap<String, Texture> textures = new HashMap<>();
+	private static final HashMap<String, Texture> textures = new HashMap<>();	
+	private static final HashMap<String, SpriteSheet> spriteSheets = new HashMap<>();
 	
-	public static final void register(String name, Texture texture) {
+	public static final void registerTexture(String name, Texture texture) {
 		textures.put(name, texture);
 	}
 	
-	public static final Texture get(String name) {
+	public static final Texture getTexture(String name) {
 		return textures.get(name);
+	}
+	
+	public static final void registerSpriteSheet(String name, SpriteSheet spriteSheet) {
+		spriteSheets.put(name, spriteSheet);
+	}
+	
+	public static final SpriteSheet getSpriteSheet(String name) {
+		return spriteSheets.get(name);
+	}
+	
+	public static final void destroy() {
+		for(Texture t : textures.values())
+			t.destroy();
+		for(SpriteSheet ss : spriteSheets.values())
+			ss.destroy();
 	}
 }

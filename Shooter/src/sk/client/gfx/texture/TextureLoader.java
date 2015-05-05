@@ -16,7 +16,17 @@ public class TextureLoader {
 			
 			int[] data = new int[width * height];
 			
+			img.getRGB(0, 0, width, height, data, 0, width);
 			
+			int[][] pixels = new int[height][width];
+			
+			for(int i = 0; i < pixels.length; i++) {
+				for(int j = 0; j < pixels[i].length; j++) {
+					pixels[i][j] = data[(j % width) + i * width];
+				}
+			}
+			
+			return pixels;
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
