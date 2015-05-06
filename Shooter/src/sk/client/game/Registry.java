@@ -36,7 +36,7 @@ public class Registry {
 	
 	public static final void registerSpriteSheets() {
 		TextureLibrary.registerSpriteSheet("TestSheet", new SpriteSheet("res/texture/spritesheet/test.png", 8, 8));
-		TextureLibrary.registerSpriteSheet("TestSheet2", new SpriteSheet("res/texture/font/font.png", 16, 16));
+		TextureLibrary.registerSpriteSheet("font", new SpriteSheet("res/texture/font/font.png", 16, 16));
 	}
 	
 	public static final void registerBackgrounds() {

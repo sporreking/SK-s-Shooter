@@ -24,8 +24,10 @@ public class TextureLibrary {
 	}
 	
 	public static final void destroy() {
-		for(Texture t : textures.values())
+		for(Texture t : textures.values()) {
 			t.destroy();
+			System.out.println("Destroyed texture with id: \"" + t.getID() + "\"");
+		}
 		for(SpriteSheet ss : spriteSheets.values())
 			ss.destroy();
 	}

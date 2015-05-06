@@ -35,6 +35,7 @@ public class TextureLoader {
 	}
 	
 	public static final Texture loadTexture(String path) {
+		Texture texture = new Texture(2, 2, new int[]{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF});
 		try {
 			BufferedImage img = ImageIO.read(new File(path));
 			
@@ -45,12 +46,12 @@ public class TextureLoader {
 			
 			img.getRGB(0, 0, width, height, pixels, 0, width);
 			
-			return new Texture(width, height, pixels);
+			texture = new Texture(width, height, pixels);
+			System.out.println("Created texture with id: \"" + texture.getID() + "\"");
 			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return new Texture(2, 2, new int[]{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF});
+		return texture;
 	}
-	
 }

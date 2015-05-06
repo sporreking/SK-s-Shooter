@@ -28,7 +28,7 @@ public class DynamicTexture extends Texture {
 	
 	public boolean increment(int i) {
 		int length = currentFrameX + currentFrameY * spriteSheet.getFramesX();
-		if(length + i >= spriteSheet.getFramesX() * spriteSheet.getFramesY())
+		if(length + i >= spriteSheet.getLength())
 			return false;
 		
 		swap(length + i);

@@ -7,6 +7,7 @@ import sk.client.gamestate.GameState;
 import sk.client.gfx.texture.DynamicTexture;
 import sk.client.gfx.texture.TextureLibrary;
 import sk.client.renderer.QuadRenderer;
+import sk.client.renderer.TextRenderer;
 
 public class GSTest extends GameState {
 	
@@ -18,9 +19,11 @@ public class GSTest extends GameState {
 	}
 	
 	public void init() {
-		dTex = new DynamicTexture(TextureLibrary.getSpriteSheet("TestSheet2"));
+		dTex = new DynamicTexture(TextureLibrary.getSpriteSheet("TestSheet"));
 		sheetTester = new QuadRenderer(300, 300, 100, 100, true, dTex);
-		dTex.swap(1, 2);
+//		dTex.swap(1, 2);
+		TextRenderer.setFont(TextureLibrary.getSpriteSheet("font"));
+		TextRenderer.draw("ABC", 0, 0);
 	}
 	
 	public void checkMouse(int button, boolean pressed) {}

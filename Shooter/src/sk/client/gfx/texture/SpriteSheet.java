@@ -25,25 +25,25 @@ public class SpriteSheet {
 		frameWidth = width / framesX;
 		frameHeight = height / framesY;
 		
-		if (!Util.isInPow2(frameWidth) && Util.isInPow2(frameHeight))
+		if(!Util.isInPow2(frameWidth) && Util.isInPow2(frameHeight))
 			throw new IllegalStateException("The frame width \"" + frameWidth
 					+ "\" and frame height \"" + frameHeight
 					+ "\" are not in the power of two");
-		if (!Util.isInPow2(frameWidth))
+		if(!Util.isInPow2(frameWidth))
 			throw new IllegalStateException("The frame width \"" + frameWidth
 					+ "\" is not in the power of two");
-		if (!Util.isInPow2(frameHeight))
+		if(!Util.isInPow2(frameHeight))
 			throw new IllegalStateException("The frame height \"" + frameHeight
 					+ "\" is not in the power of two");
 		
 		textures = new Texture[framesX * framesY];
 		
-		for (int i = 0; i < framesY; i++) {
-			for (int j = 0; j < framesX; j++) {
+		for(int i = 0; i < framesY; i++) {
+			for(int j = 0; j < framesX; j++) {
 				int[] data = new int[frameWidth * frameHeight];
 				
-				for (int k = 0; k < frameHeight; k++) {
-					for (int l = 0; l < frameWidth; l++) {
+				for(int k = 0; k < frameHeight; k++) {
+					for(int l = 0; l < frameWidth; l++) {
 						data[(l % frameWidth) + k * frameWidth] = pixels[i
 								* frameHeight + k][j * frameWidth + l];
 					}
@@ -54,10 +54,14 @@ public class SpriteSheet {
 			}
 		}
 		
+		System.out.println("Created " + textures.length
+				+ " textures with id range \"" + textures[0].getID() + " - "
+				+ textures[getLength() - 1].getID() + "\"");
+		
 	}
 	
 	public Texture getTexture(int index) {
-		if (index >= textures.length)
+		if(index >= textures.length)
 			throw new IllegalArgumentException("No texture at index \"" + index
 					+ "\"");
 		
@@ -65,7 +69,7 @@ public class SpriteSheet {
 	}
 	
 	public Texture getTexture(int x, int y) {
-		if ((x % framesX) + y * framesX >= textures.length)
+		if((x % framesX) + y * framesX >= textures.length)
 			throw new IllegalArgumentException("No texture at x: " + x + " y: "
 					+ y);
 		
@@ -96,8 +100,15 @@ public class SpriteSheet {
 		return frameHeight;
 	}
 	
+	public int getLength() {
+		return framesX * framesY;
+	}
+	
 	public void destroy() {
-		for (Texture t : textures)
+		for(Texture t : textures)
 			t.destroy();
+		System.out.println("Destroyed " + textures.length
+				+ " textures with id range \"" + textures[0].getID() + " - "
+				+ textures[getLength() - 1].getID() + "\"");
 	}
 }
