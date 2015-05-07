@@ -30,13 +30,12 @@ public class Registry {
 				TextureLoader.loadTexture("res/texture/background/space.png")
 						.setTexParams(GL11.GL_REPEAT, GL11.GL_TEXTURE_WRAP_S,
 								GL11.GL_TEXTURE_WRAP_T));
-		
-		TextureLibrary.registerTexture("Font", TextureLoader.loadTexture("res/texture/font/font.png"));
 	}
 	
 	public static final void registerSpriteSheets() {
 		TextureLibrary.registerSpriteSheet("TestSheet", new SpriteSheet("res/texture/spritesheet/test.png", 8, 8));
-		TextureLibrary.registerSpriteSheet("font", new SpriteSheet("res/texture/font/font.png", 16, 16));
+		TextureLibrary.registerSpriteSheet("fnt_mc", new SpriteSheet("res/texture/font/font.png", 16, 16));
+		TextureLibrary.registerSpriteSheet("fnt_courier", new SpriteSheet("res/texture/font/courier.png", 16, 16));
 	}
 	
 	public static final void registerBackgrounds() {

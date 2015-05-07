@@ -22,4 +22,9 @@ public final class Util {
 		return false;
 	}
 	
+	public static final boolean isPrintable(char c) {
+//		return "/*!@#$%^&*()\"{}_[]|\\?/<>,. ".contains(String.valueOf(c)) || Character.isLetterOrDigit(c);
+		return !Character.isISOControl(c);
+	}
+	
 }
