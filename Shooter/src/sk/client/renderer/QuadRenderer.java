@@ -5,6 +5,8 @@ import sk.client.gfx.texture.Texture;
 
 public class QuadRenderer extends Renderer {
 	
+	protected float width, height;
+	
 	public QuadRenderer(float x, float y, float width, float height, boolean centralize) {
 		this(x, y, width, height, 1, 1, 1, centralize, null);
 	}
@@ -51,6 +53,9 @@ public class QuadRenderer extends Renderer {
 	
 	public QuadRenderer(float x, float y, float width, float height, float s, float t, float r, float g, float b, float a, boolean centralize, Texture texture) {
 		
+		this.width = width;
+		this.height = height;
+		
 		if(centralize) {
 			setVertices(new Vertex[] {
 					new Vertex(-width/2, -height/2, 0, 0, r, g, b, a),
@@ -70,5 +75,13 @@ public class QuadRenderer extends Renderer {
 		setTexture(texture);
 		
 		setTranslation(x, y);
+	}
+	
+	public float getWidth() {
+		return width;
+	}
+	
+	public float getHeight() {
+		return height;
 	}
 }
