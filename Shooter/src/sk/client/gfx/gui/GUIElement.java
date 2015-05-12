@@ -1,10 +1,16 @@
 package sk.client.gfx.gui;
 
 import sk.client.renderer.QuadRenderer;
+import sk.client.world.entity.Entity;
+import sk.client.world.entity.EntityQuad;
 
-public abstract class GUIElement {
+public abstract class GUIElement extends EntityQuad {
 	
-	protected QuadRenderer renderer;
+	protected boolean isMouseOver = false;
+	
+	protected void init() {
+		
+	}
 	
 	public final void click(float x, float y) {
 		onClick(x, y);
@@ -12,11 +18,11 @@ public abstract class GUIElement {
 	
 	public abstract void onClick(float x, float y);
 	
-	public final void mouseOver() {
-		onMouseOver();
+	public final void mouseOver(float tick) {
+		onMouseOver(tick);
 	}
 	
-	public abstract void onMouseOver();
+	public abstract void onMouseOver(float tick);
 	
 	public final void mouseIn() {
 		onMouseIn();
@@ -30,12 +36,11 @@ public abstract class GUIElement {
 	
 	public abstract void onMouseOut();
 	
-	public float getWidth() {
-		return renderer.getWidth();
+	public boolean isMouseOver() {
+		return isMouseOver;
 	}
 	
-	public float getHeight() {
-		return renderer.getHeight();
+	protected void destroy() {
+		
 	}
-	
 }

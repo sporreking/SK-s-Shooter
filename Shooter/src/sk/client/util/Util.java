@@ -12,7 +12,7 @@ public final class Util {
 	}
 	
 	public static final float getRelativeMY() {
-		return ((float)(Mouse.getY() * -1) + Display.getHeight()) / Display.getHeight() * Game.HEIGHT;
+		return ((float)(Mouse.getY() * -1) + Display.getHeight() - 1) / Display.getHeight() * Game.HEIGHT;
 	}
 	
 	public static final boolean isInPow2(int number) {
@@ -23,8 +23,6 @@ public final class Util {
 	}
 	
 	public static final boolean isPrintable(char c) {
-//		return "/*!@#$%^&*()\"{}_[]|\\?/<>,. ".contains(String.valueOf(c)) || Character.isLetterOrDigit(c);
 		return !Character.isISOControl(c);
 	}
-	
 }

@@ -131,4 +131,8 @@ public abstract class Entity {
 	public float getRotation() {
 		return renderer.getRotation();
 	}
+	
+	public Renderer getRenderer() {
+		return renderer;
+	}
 }

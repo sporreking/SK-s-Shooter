@@ -14,8 +14,9 @@ import sk.client.weapon.Bullet;
 import sk.client.world.World;
 import sk.client.world.entity.Entity;
 import sk.client.world.entity.EntityManager;
+import sk.client.world.entity.EntityQuad;
 
-public class Player extends Entity {
+public class Player extends EntityQuad {
 	
 	public static final float PLAYER_WIDTH = 100;
 	public static final float PLAYER_HEIGHT = 100;
