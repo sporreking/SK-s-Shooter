@@ -44,7 +44,7 @@ public class Game implements SoundLoader {
 			Registry.registerSpriteSheets();
 			Registry.registerBackgrounds();
 			
-			GameStateManager.enterState("Game");
+			GameStateManager.enterState("Main Menu");
 			
 			while (!Display.isCloseRequested() && running) {
 				Time.update();

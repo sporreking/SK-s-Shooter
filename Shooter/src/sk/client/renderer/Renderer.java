@@ -77,6 +77,10 @@ public class Renderer {
 		return this;
 	}
 	
+	public Texture getTexture() {
+		return texture;
+	}
+	
 	public Vector2f getTranslation() {
 		return translation;
 	}

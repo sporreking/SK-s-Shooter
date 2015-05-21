@@ -15,7 +15,7 @@ public class DynamicTexture extends Texture {
 		if(index >= spriteSheet.getFramesX() * spriteSheet.getFramesY())
 			throw new IllegalArgumentException("No texture at index \"" + index
 					+ "\"");
-		swap(index % spriteSheet.getFramesX(), Math.floorDiv(index, spriteSheet.getFramesY()));
+		swap(index % spriteSheet.getFramesX(), Math.floorDiv(index, spriteSheet.getFramesX()));
 	}
 	
 	public void swap(int x, int y) {

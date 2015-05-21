@@ -48,7 +48,7 @@ public class GSGame extends GameState {
 		if(pressed) {
 			switch(key) {
 			case Keyboard.KEY_ESCAPE:
-				Game.stop(0);
+				GameStateManager.enterState("Main Menu");
 				break;
 			case Keyboard.KEY_0:
 				AudioManager.stopLoop(0);

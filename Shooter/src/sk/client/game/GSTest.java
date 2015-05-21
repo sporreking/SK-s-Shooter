@@ -35,19 +35,11 @@ public class GSTest extends GameState {
 		
 		gui = new GUI();
 		
-		gui.addElements(new Button(400, 400, 300, 75, dTex) {
+		gui.addElements(new Button(400, 400, 300, 75, TextureLibrary.getTexture("Button")) {
 			public void onClick(float x, float y) {
 				System.out.println("Click!");
 			}
-			
-			public void onMouseIn() {
-				dTex.swap(4, 4);
-			}
-			
-			public void onMouseOut() {
-				dTex.swap(5, 4);
-			}
-		});
+		}.setLabel("Text", 84));
 		
 		STB.start("backspace counter", 150f);
 	}

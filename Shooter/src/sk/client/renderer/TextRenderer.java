@@ -3,13 +3,14 @@ package sk.client.renderer;
 import org.lwjgl.opengl.GL11;
 
 import sk.client.gfx.texture.SpriteSheet;
+import sk.client.gfx.texture.TextureLibrary;
 
 public final class TextRenderer {
 	
 	public static final int ASCII_DIMENSIONS = 16;
 	public static final int ASCII_LENGTH = ASCII_DIMENSIONS * ASCII_DIMENSIONS;
 	
-	private static SpriteSheet font;
+	private static SpriteSheet font = TextureLibrary.getSpriteSheet("fnt_courier");
 	
 	private static float size = 48;
 	private static float distance = .5f;
