@@ -7,6 +7,7 @@ import sk.client.gamestate.GameState;
 import sk.client.gamestate.GameStateManager;
 import sk.client.gfx.gui.Button;
 import sk.client.gfx.gui.GUI;
+import sk.client.gfx.gui.InputBox;
 import sk.client.gfx.texture.TextureLibrary;
 import sk.client.util.Util;
 
@@ -22,8 +23,9 @@ public class GSMenuMain extends GameState {
 		
 		gui = new GUI();
 		
-		//Play Button
-		gui.addElements(new Button(Game.WIDTH / 2 - 200, 200, 400, 100, TextureLibrary.getTexture("Button")) {
+		// Play Button
+		gui.addElements(new Button(Game.WIDTH / 2 - 200, 200, 400, 100,
+				TextureLibrary.getTexture("Button")) {
 			
 			public void onClick(float x, float y) {
 				GameStateManager.enterState("Game");
@@ -31,14 +33,25 @@ public class GSMenuMain extends GameState {
 			
 		}.setLabel("Play"));
 		
-		//Exit Button
-		gui.addElements(new Button(Game.WIDTH / 2 - 200, 500, 400, 100, TextureLibrary.getTexture("Button")) {
+		// Exit Button
+		gui.addElements(new Button(Game.WIDTH / 2 - 200, 500, 400, 100,
+				TextureLibrary.getTexture("Button")) {
 			
 			public void onClick(float x, float y) {
 				Game.stop(0);
 			}
 			
 		}.setLabel("Exit"));
+		
+		gui.addElements(new InputBox(Game.WIDTH / 2 - 200, 10, 400, 50,
+				TextureLibrary.getTexture("Button")) {
+			
+		});
+		
+		gui.addElements(new InputBox(Game.WIDTH / 2 - 200, Game.HEIGHT - 60,
+				400, 50, TextureLibrary.getTexture("Button")) {
+			
+		});
 		
 	}
 	
@@ -52,7 +65,9 @@ public class GSMenuMain extends GameState {
 		}
 	}
 	
-	public void checkKeyboard(int key, boolean pressed) {}
+	public void checkKeyboard(int key, boolean pressed) {
+		gui.checkKeyboard(key, pressed);
+	}
 	
 	public void update(float tick) {
 		gui.update(tick);
@@ -64,5 +79,6 @@ public class GSMenuMain extends GameState {
 		gui.draw();
 	}
 	
-	public void exit() {}
+	public void exit() {
+	}
 }

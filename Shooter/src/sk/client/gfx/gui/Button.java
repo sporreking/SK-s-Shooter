@@ -74,6 +74,7 @@ public class Button extends GUIElement {
 	}
 	
 	protected void onUpdate(float tick) {
+		
 	}
 	
 	public Button setLabel(String label) {

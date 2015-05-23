@@ -8,6 +8,8 @@ public abstract class GUIElement extends EntityQuad {
 	
 	protected boolean isMouseOver = false;
 	
+	protected GUI gui;
+	
 	protected void init() {
 		
 	}
@@ -38,6 +40,10 @@ public abstract class GUIElement extends EntityQuad {
 	
 	public boolean isMouseOver() {
 		return isMouseOver;
+	}
+	
+	public void setGUI(GUI gui) {
+		this.gui = gui;
 	}
 	
 	protected void destroy() {

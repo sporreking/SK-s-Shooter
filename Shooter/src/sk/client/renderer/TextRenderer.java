@@ -51,6 +51,17 @@ public final class TextRenderer {
 		
 	}
 	
+	public static final float getWidth(String text) {
+		float width = 0;
+		for(int i = 0; i < text.length(); i++) {
+			if(i == 0)
+				width += size;
+			else
+				width += size * distance;
+		}
+		return width;
+	}
+	
 	private static final int getAsciiOffset(char c) {
 		return (int) c;
 	}
